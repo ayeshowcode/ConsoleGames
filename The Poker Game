@@ -1,0 +1,203 @@
+#include <stdio.h>
+
+int main()
+{
+    char arr[52][2] = {
+        {'2', 'H'},
+        {'3', 'H'},
+        {'4', 'H'},
+        {'5', 'H'},
+        {'6', 'H'},
+        {'7', 'H'},
+        {'8', 'H'},
+        {'9', 'H'},
+        {'1', 'H'},
+        {'J', 'H'},
+        {'Q', 'H'},
+        {'K', 'H'},
+        {'A', 'H'},
+
+        {'2', 'D'},
+        {'3', 'D'},
+        {'4', 'D'},
+        {'5', 'D'},
+        {'6', 'D'},
+        {'7', 'D'},
+        {'8', 'D'},
+        {'9', 'D'},
+        {'1', 'D'},
+        {'J', 'D'},
+        {'Q', 'D'},
+        {'K', 'D'},
+        {'A', 'D'},
+
+        {'2', 'C'},
+        {'3', 'C'},
+        {'4', 'C'},
+        {'5', 'C'},
+        {'6', 'C'},
+        {'7', 'C'},
+        {'8', 'C'},
+        {'9', 'C'},
+        {'1', 'C'},
+        {'J', 'C'},
+        {'Q', 'C'},
+        {'K', 'C'},
+        {'A', 'C'},
+
+        {'2', 'S'},
+        {'3', 'S'},
+        {'4', 'S'},
+        {'5', 'S'},
+        {'6', 'S'},
+        {'7', 'S'},
+        {'8', 'S'},
+        {'9', 'S'},
+        {'1', 'S'},
+        {'J', 'S'},
+        {'Q', 'S'},
+        {'K', 'S'},
+        {'A', 'S'},
+    };
+            int user1_wins=0, user2_wins=0, draws=0;
+
+    while(1){
+        char round;
+        printf("round?? (y/n) ");
+        scanf(" %c", &round);
+       
+       if (round=='n' || round=='N')
+       {
+           break;
+       }
+
+    while (round=='y' || round=='Y'){
+    int num1;
+    char cardnum1[100];
+    char cardtype1[100];
+
+    printf("USER 1: \n");
+    for (int user1 = 0; user1 < 5; user1++)
+    {
+        printf("Enter the number (1-52): ");
+        scanf("%d", &num1);
+        cardnum1[user1] = arr[num1 - 1][0];
+        cardtype1[user1] = arr[num1 - 1][1];
+    }
+    printf("USER 1 CARDS:\n ");
+    for (int user1 = 0; user1 < 5; user1++)
+    {
+        printf("[%c , %c]\n", cardnum1[user1], cardtype1[user1]);
+    }
+
+    int num2;
+    char cardnum2[100];
+    char cardtype2[100]; // user 2 cards number and type!
+
+    printf("USER 2: \n");
+    for (int user2 = 0; user2 < 5; user2++)
+    {
+        printf("Enter the number (1-52): ");
+        scanf("%d", &num2);
+        cardnum2[user2] = arr[num2 - 1][0];
+        cardtype2[user2] = arr[num2 - 1][1];
+    }
+    printf("USER 2 CARDS:\n ");
+    for (int user2 = 0; user2 < 5; user2++)
+    {
+        printf("[%c , %c]\n", cardnum2[user2], cardtype2[user2]);
+    }
+
+
+    
+ 
+   int count1=1;
+   int count2=1;
+
+        for (int i=0; i<4; i++)
+        {
+            if (cardtype1[i]==cardtype1[i+1])
+                count1++;
+        }
+
+        for (int i=0; i<4; i++)
+        {
+            if (cardtype2[i]==cardtype2[i+1])
+                count2++;
+        }
+
+          if (count1 == 5 && count2 != 5)
+          {
+        printf("user 1 wins!! its a flesh!!\n");
+                user1_wins++;
+                break;
+
+          }
+    else if (count1 != 5 && count2 == 5)
+    {
+        printf("User 2 wins! its a flesh!!\n");  
+        user2_wins++;
+                break;
+
+
+    }
+          
+    else if (count1 == 5 && count2 == 5)
+    {
+        printf("Draw\n");
+        draws++;
+                break;
+    }
+    
+     count1 = 1;
+      count2 = 1;
+
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = i +1; j < 4; j++)
+        {
+             if (cardnum1[i] == cardnum1[j])
+            count1++;
+        }
+    }
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = i +1; j < 4; j++)
+        {
+             if (cardnum2[i] == cardnum2[j])
+            count2++;
+        }
+    }
+
+
+    if (count1 == 3 && count2 != 3)
+    {
+        printf("user 1 wins!! 3 of a kind\n");
+        user1_wins++;
+        break;
+    }
+    else if (count1 != 3 && count2 == 3)
+       {  
+        printf("User 2 wins! 3 of a kind\n");
+       user2_wins++;
+       break;
+       }
+    else if (count1 == 3 && count2 == 3)
+    {
+         printf("Draw\n");
+         draws++;
+         break;
+    }
+    else 
+    {
+        printf("High cards\n");
+        break;
+    }
+    }
+    }
+    printf("user 1 wins: %d rounds\n", user1_wins);
+           printf("User 2 wins: %d rounds\n", user2_wins);
+           printf("%d draws\n" ,draws);
+
+    return 0;
+}
